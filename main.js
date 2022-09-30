@@ -54,7 +54,9 @@ let parent = document.querySelector("#exercise-container3");
 parent.replaceChild(newP, n1P);
 
 // TODO: Remove the "New Child Node"
-parent.removeChild(newP);
+setTimeout(() => {
+  parent.removeChild(newP);
+}, 5000);
 
 /*----------- Exercise #4: LIST ITEMS ----------- */
 // Use the following array of values to generate a list on the DOM
@@ -96,8 +98,22 @@ container.appendChild(ul);
 // BONUS: The modal popup should be able to be closed. Refactor for this functionality
 
 function show() {
-  alert("Hello world!");
+  let modal = document.createElement("div");
+  let modalP = document.createElement("p");
+  let closeButton = document.createElement("button");
+  closeButton.textContent = "Close";
+
+  closeButton.addEventListener("click", function () {
+    modal.remove();
+  });
+
+  modalP.textContent =
+    "Clicking the button triggers the onclick event, which calls the JS function show()... which alerts the user";
+  modal.appendChild(modalP);
+  modal.appendChild(closeButton);
+  modal.id = "modal";
+  document.body.appendChild(modal);
 }
 
-let btn = document.querySelector("#btn");
-btn.onclick = show;
+let btn = document.getElementById("btn");
+btn.addEventListener("click", show);
